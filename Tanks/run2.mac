@@ -1,0 +1,16 @@
+/run/initialize
+/control/verbose 0
+
+/analysis/setFileName EAR1_196.0.root
+
+/generator/setProfileFileName EAR1_196.0_E1_1.e-3_E2_1.e9.root
+/generator/setProfileHistName histfluka
+/generator/setFluxFileName plots_Comp.root
+/generator/setFluxHistName hFlux_EAR1
+/generator/setTOFLength 196.0 # m
+
+# Simulate 3600 seconds with different energy ranges
+/generator/setFluxLowerLimit   5 # MeV
+/generator/setFluxUpperLimit 100 # MeV
+/run/printProgress  1000000
+/run/beamOn       335070000
