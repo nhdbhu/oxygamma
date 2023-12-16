@@ -47,6 +47,7 @@ file(GLOB COPY_FILES
   "*.C"
   "*.in"
   "*.root"
+  "*.sh"
 )
 file(COPY ${COPY_FILES} DESTINATION ${PROJECT_BINARY_DIR})
 

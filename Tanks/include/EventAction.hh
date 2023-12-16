@@ -12,7 +12,7 @@
 #include "Randomize.hh"
 #include "globals.hh"
 
-#include "TargetSD.hh"
+#include "CrystalSD.hh"
 
 
 class EventAction : public G4UserEventAction
@@ -23,5 +23,9 @@ public:
 
     void BeginOfEventAction(const G4Event* event) override;
     void   EndOfEventAction(const G4Event* event) override;
+
+private:
+    HitsCollection* GetHitsCollection(G4int hcID, const G4Event* event) const;
+    G4int fCrystalHCID = -1;
 };
 

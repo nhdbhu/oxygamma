@@ -18,7 +18,7 @@ namespace
 {
     void PrintUsage()
     {
-        G4cerr << " Usage: sim [-m macro] [-t nThreads]" << G4endl;
+        G4cerr << " Usage: sim [-m macro] [-t nThreads] [-s seed]" << G4endl;
         G4cerr << " Note: -t option is available only for multithreaded mode." << G4endl;
     }
 }

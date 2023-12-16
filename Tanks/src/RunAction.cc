@@ -10,17 +10,13 @@ RunAction::RunAction()
 
     analysisManager->SetNtupleMerging(true);
 
-    analysisManager->CreateNtuple("Target", "Particles");
+    analysisManager->CreateNtuple("Detector", "Particles");
     analysisManager->CreateNtupleDColumn("primE");
     analysisManager->CreateNtupleDColumn("T");
-    analysisManager->CreateNtupleDColumn("X");
-    analysisManager->CreateNtupleDColumn("Y");
-    analysisManager->CreateNtupleDColumn("Z");
     analysisManager->CreateNtupleDColumn("E");
-    analysisManager->CreateNtupleDColumn("PX");
-    analysisManager->CreateNtupleDColumn("PY");
-    analysisManager->CreateNtupleDColumn("PZ");
+    analysisManager->CreateNtupleDColumn("Edep");
     analysisManager->CreateNtupleIColumn("PDG");
+    analysisManager->CreateNtupleIColumn("Det");
     analysisManager->FinishNtuple(0);
 }
 

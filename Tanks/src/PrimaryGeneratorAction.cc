@@ -48,6 +48,7 @@ PrimaryGeneratorAction::PrimaryGeneratorActionMessenger::~PrimaryGeneratorAction
     delete fFluxHistNameCmd;
     delete fFluxLowerLimitCmd;
     delete fFluxUpperLimitCmd;
+    delete fTOFLengthCmd;
 }
 
 
@@ -133,7 +134,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     profile2D->GetRandom2(x, y);
     z = fTOFLength * m;
     double energy = fluxRange->GetRandom();
-    //G4cout << energy << G4endl;
 
     particleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., -1.));
     particleGun->SetParticlePosition(G4ThreeVector(x, y, z));

@@ -9,7 +9,6 @@
 /generator/setFluxHistName hFlux_EAR1
 /generator/setTOFLength 183.5 # m
 
-# Simulate 3600 seconds with different energy ranges
 /generator/setFluxLowerLimit   5 # MeV
 /generator/setFluxUpperLimit 100 # MeV
 /run/printProgress  1000000
