@@ -344,7 +344,7 @@ void DetectorConstruction::ConstructSDandField()
 {
     G4SDManager* sdManager = G4SDManager::GetSDMpointer();
 
-    const int numDetectors = 16; // ENSURE THIS MATCHES EVENTACTION
+    const int numDetectors = 18; // ENSURE THIS MATCHES EVENTACTION
 
     for (int i = 1; i <= numDetectors; i++) {
         G4String sdName = "CrystalSD" + std::to_string(i);

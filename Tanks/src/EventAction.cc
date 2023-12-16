@@ -25,7 +25,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
     auto analysisManager = G4AnalysisManager::Instance();
 
     std::set<G4int> processedCollections;
-    const int numDetectors = 16; // ENSURE THIS MATCHES DETECTORCONSTRUCTION
+    const int numDetectors = 18; // ENSURE THIS MATCHES DETECTORCONSTRUCTION
 
     for (int i = 1; i <= numDetectors; i++) {
         G4String sdName = "CrystalSD" + std::to_string(i);
