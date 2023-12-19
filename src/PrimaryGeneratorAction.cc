@@ -79,7 +79,6 @@ PrimaryGeneratorAction::PrimaryGeneratorAction() : G4VUserPrimaryGeneratorAction
     particleGun = new G4ParticleGun(nofParticles);
 
     auto particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("neutron");
-    //auto particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("gamma"); // TEST
     particleGun->SetParticleDefinition(particleDefinition);
 
     std::lock_guard<std::mutex> lock(fileMutex);
@@ -89,8 +88,8 @@ PrimaryGeneratorAction::PrimaryGeneratorAction() : G4VUserPrimaryGeneratorAction
     fProfileHistName = "histfluka";
     fFluxFileName = "plots_Comp.root";
     fFluxHistName = "hFlux_EAR1";
-    fLowerLimit = 10e6;
-    fUpperLimit = 10e6;
+    fLowerLimit = 5e6;
+    fUpperLimit = 100e6;
     fTOFLength = 196;
 
     fMessenger = new PrimaryGeneratorActionMessenger(this);
@@ -139,7 +138,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     particleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., -1.));
     particleGun->SetParticlePosition(G4ThreeVector(x, y, z));
     particleGun->SetParticleEnergy(energy * eV);
-    //particleGun->SetParticleEnergy(6.3 * MeV); // TEST
     particleGun->GeneratePrimaryVertex(anEvent);
 }
 

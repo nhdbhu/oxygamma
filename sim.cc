@@ -39,11 +39,11 @@ int main(int argc, char** argv)
     srand(time(&StartTime));
     auto seed = rand();
 
-    for (G4int i=1; i<argc; i=i+2)
+    for (G4int i = 1; i < argc; i = i + 2)
     {
-        if (G4String(argv[i]) == "-m") macro = argv[i+1];
-        else if (G4String(argv[i]) == "-t") nThreads = G4UIcommand::ConvertToInt(argv[i+1]);
-        else if (G4String(argv[i]) == "-s") seed = G4UIcommand::ConvertToInt(argv[i+1]);
+        if (G4String(argv[i]) == "-m") macro = argv[i + 1];
+        else if (G4String(argv[i]) == "-t") nThreads = G4UIcommand::ConvertToInt(argv[i + 1]);
+        else if (G4String(argv[i]) == "-s") seed = G4UIcommand::ConvertToInt(argv[i + 1]);
         else
         {
             PrintUsage();
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
     G4VModularPhysicsList *physicsList = new QGSP_INCLXX_HP;
     runManager->SetUserInitialization(physicsList);
     runManager->SetUserInitialization(new ActionInitialization());
-//    runManager->Initialize();
+    //runManager->Initialize();
 
     // Initialize visualization
     G4VisManager* visManager = new G4VisExecutive();

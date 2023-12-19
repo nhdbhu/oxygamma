@@ -26,7 +26,7 @@ public:
 
 private:
     HitsCollection* GetHitsCollection(G4int hcID, const G4Event* event) const;
-    const int numDetectors = 2;
+    const int numDetectors = 8; // ENSURE SAME NUMBER IN DETECTORCONSTRUCTION
     std::vector<bool> processedDetectors;
 };
 

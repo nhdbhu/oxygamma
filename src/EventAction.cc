@@ -37,18 +37,27 @@ void EventAction::EndOfEventAction(const G4Event* event)
         if (hitsCollection) {
             for (size_t j = 0; j < hitsCollection->entries(); j++) {
                 auto hit = (*hitsCollection)[j];
-                if (hit->GetEdep() > 1.5) {
+                auto energy = hit->GetEnergy();
+                if (energy > 0.1) {
+                    auto edep = hit->GetEdep();
+                    auto det = hit->GetDet();
                     analysisManager->FillNtupleDColumn(0, event->GetPrimaryVertex()->GetPrimary()->GetKineticEnergy());
                     analysisManager->FillNtupleDColumn(1, hit->GetTime());
-                    analysisManager->FillNtupleDColumn(2, hit->GetEnergy());
-                    analysisManager->FillNtupleDColumn(3, hit->GetEdep());
+                    analysisManager->FillNtupleDColumn(2, energy);
+                    analysisManager->FillNtupleDColumn(3, edep);
                     analysisManager->FillNtupleIColumn(4, hit->GetPDG());
                     analysisManager->FillNtupleIColumn(5, hit->GetDet());
-                    analysisManager->FillNtupleIColumn(6, event->GetEventID());
+                    if (det != 8) { // LaBr3 - ENSURE CONSISTENCY WITH DETECTORCONSTRUCTION
+                        auto sigma = - 1.89e-3 * edep + 1.68e-2 * std::sqrt(edep) - 2.47e-3;
+                        analysisManager->FillNtupleDColumn(6, G4RandGauss::shoot(edep, sigma));
+                    } else { // HPGe - ENSURE CONSISTENCY WITH DETECTORCONSTRUCTION
+                        auto fwhm = 0.000643453 + edep * 0.00104647 - edep * edep * 0.000121787;
+                        auto sigma = fwhm/2.354820045031;
+                        analysisManager->FillNtupleDColumn(6, G4RandGauss::shoot(edep, sigma));
+                    }
                     analysisManager->AddNtupleRow();
                 }
             }
-            // mark collection as processed
             processedDetectors[i] = true;
         }
     }

@@ -9,7 +9,7 @@
 /generator/setFluxHistName hFlux_EAR1
 /generator/setTOFLength 183.5 # m
 
-/generator/setFluxLowerLimit  5 # MeV
-/generator/setFluxUpperLimit 10 # MeV
-/run/printProgress   10
-/run/beamOn         100
+/generator/setFluxLowerLimit   5 # MeV
+/generator/setFluxUpperLimit 100 # MeV
+/run/printProgress   100000
+/run/beamOn         1000000

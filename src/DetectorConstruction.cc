@@ -20,21 +20,16 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
 
     this->ConstructTank(theWorldL);
 
-    this->ConstructLaBr3(theWorldL, 100*mm, 180, 381*mm, 50.8*mm, 1);
-    this->ConstructLaBr3(theWorldL, 300*mm, 180, 381*mm, 50.8*mm, 2);
-    this->ConstructLaBr3(theWorldL, 500*mm, 75, 38.1*mm, 50.8*mm, 3);
+    this->ConstructLaBr3(theWorldL, 200*mm, 45, 38.1*mm, 38.1*mm, 1);
+    this->ConstructLaBr3(theWorldL, 100*mm, 75, 38.1*mm, 25.4*mm, 2);
+    this->ConstructLaBr3(theWorldL, 200*mm, 105, 38.1*mm, 50.8*mm, 3);
 
-    this->ConstructLaBr3(theWorldL, 100*mm, -75, 38.1*mm, 38.1*mm, 4);
-    this->ConstructLaBr3(theWorldL, 300*mm, -75, 38.1*mm, 38.1*mm, 5);
-    this->ConstructLaBr3(theWorldL, 500*mm, -75, 38.1*mm, 38.1*mm, 6);
+    this->ConstructLaBr3(theWorldL, 500*mm, -75, 38.1*mm, 50.8*mm, 4);
+    this->ConstructLaBr3(theWorldL, 500*mm, -60, 38.1*mm, 38.1*mm, 5);
+    this->ConstructLaBr3(theWorldL, 500*mm, -45, 38.1*mm, 25.4*mm, 6);
+    this->ConstructLaBr3(theWorldL, 500*mm, -30, 38.1*mm, 50.8*mm, 7);
 
-    this->ConstructLaBr3(theWorldL, 100*mm, 45, 38.1*mm, 25.4*mm, 7);
-    this->ConstructLaBr3(theWorldL, 300*mm, 45, 38.1*mm, 25.4*mm, 8);
-    this->ConstructLaBr3(theWorldL, 500*mm, 45, 38.1*mm, 25.4*mm, 9);
-
-    this->ConstructHPGe(theWorldL, 175*mm, -45, 11);
-    this->ConstructHPGe(theWorldL, 325*mm, -45, 12);
-    this->ConstructHPGe(theWorldL, 475*mm, -45, 13);
+    this->ConstructHPGe(theWorldL, 500*mm, -90, 8);
 
     return theWorldP;
 }
@@ -85,7 +80,7 @@ void DetectorConstruction::ConstructTank(G4LogicalVolume* motherL)
 {
     auto sphi = 0.*deg;
     auto dphi = 360.*deg;
-    auto tankInnerR = 0.5*6*cm;
+    auto tankInnerR = 0.5*5*cm;
     auto tankInnerZ = 1*cm;
     auto tankOuterR = tankInnerR+0.4*cm;
     auto tankOuterZ = tankInnerZ+0.2*cm;
@@ -338,7 +333,7 @@ void DetectorConstruction::ConstructSDandField()
 {
     G4SDManager* sdManager = G4SDManager::GetSDMpointer();
 
-    const int numDetectors = 2; // ENSURE THIS MATCHES EVENTACTION
+    const int numDetectors = 8; // ENSURE THIS MATCHES EVENTACTION
 
     for (int i = 1; i <= numDetectors; i++) {
         G4String sdName = "CrystalSD" + std::to_string(i);

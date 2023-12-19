@@ -3,9 +3,6 @@
 
 RunAction::RunAction()
 {
-    // set printing event number per each event
-    //G4RunManager::GetRunManager()->SetPrintProgress(1);
-
     auto analysisManager = G4AnalysisManager::Instance();
 
     analysisManager->SetNtupleMerging(true);
@@ -17,7 +14,7 @@ RunAction::RunAction()
     analysisManager->CreateNtupleDColumn("Edep");
     analysisManager->CreateNtupleIColumn("PDG");
     analysisManager->CreateNtupleIColumn("Det");
-    analysisManager->CreateNtupleIColumn("ID");
+    analysisManager->CreateNtupleDColumn("Edepres");
     analysisManager->FinishNtuple(0);
 }
 

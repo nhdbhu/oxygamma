@@ -8,9 +8,7 @@ CrystalSD::CrystalSD(const G4String& name) : G4VSensitiveDetector(name)
 
 
 CrystalSD::~CrystalSD()
-{
-    //delete hitsCollection;
-}
+{}
 
 
 void CrystalSD::Initialize(G4HCofThisEvent* hce) {
@@ -53,5 +51,4 @@ G4bool CrystalSD::ProcessHits(G4Step *aStep, G4TouchableHistory*)
 
     return true;
 }
-
 
