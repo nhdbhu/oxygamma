@@ -38,7 +38,7 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
 void DetectorConstruction::DefineMaterials()
 { 
     vacuum = nist->FindOrBuildMaterial("G4_Galactic");
-    target = nist->FindOrBuildMaterial("G4_WATER");
+    target = nist->FindOrBuildMaterial("G4_Galactic");
     //air = nist->FindOrBuildMaterial("G4_AIR");
     tankMat = nist->FindOrBuildMaterial("G4_Al");
 
@@ -81,7 +81,7 @@ void DetectorConstruction::ConstructTank(G4LogicalVolume* motherL)
     auto sphi = 0.*deg;
     auto dphi = 360.*deg;
     auto tankInnerR = 0.5*5*cm;
-    auto tankInnerZ = 1*cm;
+    auto tankInnerZ = 5*cm;
     auto tankOuterR = tankInnerR+0.4*cm;
     auto tankOuterZ = tankInnerZ+0.2*cm;
 

@@ -16,10 +16,6 @@ void CrystalSD::Initialize(G4HCofThisEvent* hce) {
     hitsCollection = new HitsCollection(SensitiveDetectorName, hcName);
     G4int hcID = G4SDManager::GetSDMpointer()->GetCollectionID(hcName);
     hce->AddHitsCollection(hcID, hitsCollection);
-
-    // TO DO: move to ProcessHits then use timing to create hits & allocate hitIndex
-    hitsCollection->insert(new CrystalHit());
-    hitIndex = 0;
 }
 
 
@@ -29,21 +25,21 @@ G4bool CrystalSD::ProcessHits(G4Step *aStep, G4TouchableHistory*)
     G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
     G4StepPoint *postStepPoint = aStep->GetPostStepPoint();
 
-    if (preStepPoint->GetStepStatus() == fGeomBoundary && postStepPoint->GetPhysicalVolume()->GetName() != "worldP") {
+    //if (preStepPoint->GetStepStatus() == fGeomBoundary && postStepPoint->GetPhysicalVolume()->GetName() != "worldP") {
+    if (hitsCollection->GetSize() == 0) {
         //G4cout << "Enters detector " << preStepPoint->GetTouchable()->GetCopyNumber() << G4endl;
-        CrystalHit* hit = (*hitsCollection)[hitIndex];
-        if (hit) {
-            hit->SetTime(preStepPoint->GetGlobalTime());
-            hit->SetEnergy(preStepPoint->GetKineticEnergy());
-            hit->SetEdep(0);
-            hit->SetPDG(track->GetDefinition()->GetPDGEncoding());
-            hit->SetDet(preStepPoint->GetTouchable()->GetCopyNumber());
-        }
+        CrystalHit* newHit = new CrystalHit();
+        newHit->SetTime(preStepPoint->GetGlobalTime());
+        newHit->SetEnergy(preStepPoint->GetKineticEnergy());
+        newHit->SetEdep(0);
+        newHit->SetPDG(track->GetDefinition()->GetPDGEncoding());
+        newHit->SetDet(preStepPoint->GetTouchable()->GetCopyNumber());
+        hitsCollection->insert(newHit);
     }
 
     edep = aStep->GetTotalEnergyDeposit();
     if (edep > 0) {
-        CrystalHit* hit = (*hitsCollection)[hitIndex];
+        CrystalHit* hit = (*hitsCollection)[0];
         if (hit) {
             hit->AddEdep(edep);
         }

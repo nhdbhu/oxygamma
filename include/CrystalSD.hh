@@ -30,7 +30,6 @@ public:
 
     virtual void Initialize(G4HCofThisEvent* hce) override;
 
-    G4int hitIndex;
 
 private:
     G4double edep;

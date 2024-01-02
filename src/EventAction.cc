@@ -28,11 +28,11 @@ void EventAction::EndOfEventAction(const G4Event* event)
 {
     auto analysisManager = G4AnalysisManager::Instance();
 
-    for (int i = 1; i <= numDetectors; i++) {
+    for (int i = 1; i < numDetectors+1; i++) {
         G4String sdName = "CrystalSD" + std::to_string(i);
         G4String collectionName = sdName + "HitsCollection";
         G4int hcID = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName);
-        if (processedDetectors[i]) continue;
+        if (processedDetectors[i-1]) continue;
         auto hitsCollection = GetHitsCollection(hcID, event);
         if (hitsCollection) {
             for (size_t j = 0; j < hitsCollection->entries(); j++) {
@@ -40,7 +40,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
                 auto energy = hit->GetEnergy();
                 if (energy > 0.1) {
                     auto edep = hit->GetEdep();
-                    auto det = hit->GetDet();
+                    G4int det = hit->GetDet();
                     analysisManager->FillNtupleDColumn(0, event->GetPrimaryVertex()->GetPrimary()->GetKineticEnergy());
                     analysisManager->FillNtupleDColumn(1, hit->GetTime());
                     analysisManager->FillNtupleDColumn(2, energy);
@@ -58,7 +58,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
                     analysisManager->AddNtupleRow();
                 }
             }
-            processedDetectors[i] = true;
+            processedDetectors[i-1] = true;
         }
     }
 }
